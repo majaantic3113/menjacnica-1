@@ -27,6 +27,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 
 import menjacnica.Valuta;
+import menjacnica.sistemskeoperacije.SOIzvrsiTransakaciju;
+
 import java.awt.Toolkit;
 
 public class IzvrsiZamenuGUI extends JFrame {
@@ -144,7 +146,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 		}
 		return rdbtnKupovina;
 	}
-	private JRadioButton getRdbtnProdaja() {
+	protected JRadioButton getRdbtnProdaja() {
 		if (rdbtnProdaja == null) {
 			rdbtnProdaja = new JRadioButton("Prodaja");
 			buttonGroup.add(rdbtnProdaja);
@@ -164,7 +166,8 @@ public class IzvrsiZamenuGUI extends JFrame {
 			btnIzvrsiZamenu = new JButton("Izracunaj iznos");
 			btnIzvrsiZamenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					izvrsiZamenu();
+					GUIKontroler.izvrsiZamenu(valuta, rdbtnProdaja.isSelected(), Double.parseDouble(textFieldIznos.getText()), 
+							 textFieldKonacniIznos.getText());
 				}
 			});
 			btnIzvrsiZamenu.setBounds(24, 234, 160, 25);
@@ -183,7 +186,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 		}
 		return btnOdustani;
 	}
-	private JTextField getTextFieldIznos() {
+	protected JTextField getTextFieldIznos() {
 		if (textFieldIznos == null) {
 			textFieldIznos = new JTextField();
 			textFieldIznos.setBounds(10, 91, 200, 25);
@@ -224,7 +227,7 @@ public class IzvrsiZamenuGUI extends JFrame {
 		}
 		return lblKonacniIznos;
 	}
-	private JTextField getTextFieldKonacniIznos() {
+	protected JTextField getTextFieldKonacniIznos() {
 		if (textFieldKonacniIznos == null) {
 			textFieldKonacniIznos = new JTextField();
 			textFieldKonacniIznos.setBounds(154, 193, 256, 25);
@@ -239,17 +242,5 @@ public class IzvrsiZamenuGUI extends JFrame {
 		textFieldValuta.setText(valuta.getSkraceniNaziv());
 	}
 	
-	private void izvrsiZamenu(){
-		try{
-			double konacniIznos = 
-					glavniProzor.sistem.izvrsiTransakciju(valuta,
-							rdbtnProdaja.isSelected(), 
-							Double.parseDouble(textFieldIznos.getText()));
-		
-			textFieldKonacniIznos.setText(""+konacniIznos);
-		} catch (Exception e1) {
-		JOptionPane.showMessageDialog(contentPane, e1.getMessage(),
-				"Greska", JOptionPane.ERROR_MESSAGE);
-	}
-	}
+
 }
