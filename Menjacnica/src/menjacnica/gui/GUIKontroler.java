@@ -90,7 +90,7 @@ public class GUIKontroler {
 	
 	
 	public static void prikaziDodajKursGUI() {
-		DodajKursGUI prozor = new DodajKursGUI(glavniProzor);
+		DodajKursGUI prozor = new DodajKursGUI();
 		prozor.setLocationRelativeTo(glavniProzor.getContentPane());
 		prozor.setVisible(true);
 	}
@@ -98,8 +98,7 @@ public class GUIKontroler {
 	
 	public static void prikaziObrisiKursGUI(Valuta kurs) {
 		if (kurs != null) {
-			ObrisiKursGUI prozor = new ObrisiKursGUI(glavniProzor,
-					kurs);
+			ObrisiKursGUI prozor = new ObrisiKursGUI(kurs);
 			prozor.setLocationRelativeTo(glavniProzor.getContentPane());
 			prozor.setVisible(true);
 		}
@@ -108,8 +107,7 @@ public class GUIKontroler {
 
 	public static void prikaziIzvrsiZamenuGUI(Valuta kurs) {
 		if (kurs != null) {
-			IzvrsiZamenuGUI prozor = new IzvrsiZamenuGUI(glavniProzor,
-				 kurs);
+			IzvrsiZamenuGUI prozor = new IzvrsiZamenuGUI(kurs);
 			prozor.setLocationRelativeTo(glavniProzor.getContentPane());
 			prozor.setVisible(true);
 		}
